@@ -1,0 +1,139 @@
+{
+  "name": "latex-dev-container",
+  "dockerComposeFile": "./docker-compose.yml",
+  "extensions": [
+    "james-yu.latex-workshop",
+    "github.github-copilot"
+  ],
+  "service": "latex-dev-container",
+  "workspaceFolder": "/workdir",
+  "shutdownAction": "stopCompose",
+  "settings": {
+    "terminal.integrated.shell": "/bin/bash",
+    "[tex]": {
+      // スニペット補完中にも補完を使えるようにする
+      "editor.suggest.snippetsPreventQuickSuggestions": false,
+      // インデント幅を2にする
+      "editor.tabSize": 2
+    },
+    "[latex]": {
+      // スニペット補完中にも補完を使えるようにする
+      "editor.suggest.snippetsPreventQuickSuggestions": false,
+      // インデント幅を2にする
+      "editor.tabSize": 2
+    },
+    "[lualatex]": {
+      // スニペット補完中にも補完を使えるようにする
+      "editor.suggest.snippetsPreventQuickSuggestions": false,
+      // インデント幅を2にする
+      "editor.tabSize": 2,
+      "editor.formatOnSave": true
+    },
+    "[bibtex]": {
+      // インデント幅を2にする
+      "editor.tabSize": 2
+    },
+    // ---------- LaTeX Workshop ----------
+    // 使用パッケージのコマンドや環境の補完を有効にする
+    "latex-workshop.intellisense.package.enabled": true,
+    // 生成ファイルを削除するときに対象とするファイル
+    // デフォルト値に "*.synctex.gz" を追加
+    "latex-workshop.latex.clean.fileTypes": [
+      "*.aux",
+      "*.bbl",
+      "*.blg",
+      "*.idx",
+      "*.ind",
+      "*.lof",
+      "*.lot",
+      "*.out",
+      "*.toc",
+      "*.acn",
+      "*.acr",
+      "*.alg",
+      "*.glg",
+      "*.glo",
+      "*.gls",
+      "*.ist",
+      "*.fls",
+      "*.log",
+      "*.fdb_latexmk",
+      "*.snm",
+      "*.nav",
+      "*.dvi"
+      //"*.synctex.gz"
+    ],
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "latex-workshop.intellisense.graphicspath.enabled": true,
+    "latex-workshop.latex.recipes": [
+      {
+        "name": "lualatex",
+        "tools": [
+          "Requirements",
+          "LuaLaTeX",
+          "LuaLaTeX"
+        ]
+      }
+    ],
+    "latex-workshop.latex.tools": [
+      {
+        "name": "Requirements",
+        "command": "/workdir/installer.sh",
+        "args": []
+      },
+      {
+        "name": "LuaLaTeX",
+        "command": "lualatex",
+        "args": [
+          "--cmdx",
+          "-file-line-error",
+          "-synctex=1",
+          "-interaction=nonstopmode",
+          "-kanji=utf8",
+          "%DOC%"
+        ]
+      },
+      {
+        "name": "ptex2pdf",
+        "command": "ptex2pdf",
+        "args": [
+          "-l",
+          "-synctex=1",
+          "-interaction=nonstopmode",
+          "-file-line-error",
+          "-kanji=utf8",
+          //"-shell-escape",
+          "%DOC%"
+        ]
+      },
+      {
+        "name": "platex",
+        "command": "platex",
+        "args": [
+          "-synctex=1",
+          "-interaction=nonstopmode",
+          "-file-line-error",
+          "-kanji=utf8",
+          //"-shell-escape",
+          "%DOC%"
+        ]
+      },
+      {
+        "name": "dvipdfmx",
+        "command": "dvipdfmx",
+        "args": [
+          "%DOCFILE%.dvi"
+        ]
+      },
+      {
+        "name": "pbibtex",
+        "command": "pbibtex",
+        "args": [
+          "-kanji=utf8",
+          "%DOCFILE%"
+        ]
+      }
+    ],
+    "latex-workshop.latex.autoClean.run": "onBuilt", // ビルド時に一時ファイル(.auxなど)を削除
+  }
+}

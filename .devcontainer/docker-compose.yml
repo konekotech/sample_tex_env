@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  latex-dev-container:
+    build: .
+    image: konekotech/latex-dev-image
+    container_name: latex-dev-container
+    environment:
+      SHELL: "/bin/bash"
+    command: /bin/sh -c "[ -d "latex_for_beginner" ] || git clone https://github.com/konekotech/latex_for_beginner && sleep infinity"
+    volumes:
+      - ../:/workdir
+      - /System/Library/Fonts:/usr/share/fonts/SystemLibraryFonts:ro
+      - $HOME/Library/Fonts:/root/.fonts:ro
+      # - ../.latexmkrc:/root/.latexmkrc

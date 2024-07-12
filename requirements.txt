@@ -1,0 +1,10 @@
+float
+jknapltx
+rsfs
+mathtools
+booktabs
+pdfpages
+pdflscape
+listings
+latexindent
+jsclasses
